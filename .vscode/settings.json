@@ -1,0 +1,8 @@
+{
+  "solidity.packageDefaultDependenciesContractsDirectory": "src",
+  "solidity.packageDefaultDependenciesDirectory": "lib",
+  "solidity.compileUsingRemoteVersion": "v0.8.23",
+  "solidity.defaultCompiler": "remote",
+  "solidity.remappingsUnix": [],
+  "solidity.remappings": []
+}
