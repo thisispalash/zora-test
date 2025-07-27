@@ -1,0 +1,5 @@
+@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/
+@openzeppelin/contracts-upgradeable/=lib/openzeppelin-contracts-upgradeable/contracts/
+@zoralabs/shared-contracts/=lib/zora-protocol/packages/shared-contracts/src/
+@zoralabs/coins/=lib/zora-protocol/packages/coins/src/
+@zoralabs/smart-wallet/=lib/zora-protocol/packages/smart-wallet/src/

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 pragma solidity ^0.8.23 < 0.9.0;
 
-import {ICoinbaseSmartWalletFactory} from "github/ourzora/zora-protocol/packages/smart-wallet/src/interfaces/ICoinbaseSmartWalletFactory.sol";
+import {ICoinbaseSmartWalletFactory} from "@zoralabs/smart-wallet/interfaces/ICoinbaseSmartWalletFactory.sol";
 
 contract Wallet {
 

@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: Apache-2.0
 pragma solidity ^0.8.23 < 0.9.0;
 
-import {ZoraAccountManagerImpl} from "github/ourzora/zora-protocol/packages/smart-wallet/src/ZoraAccountManagerImpl.sol";
+import {ZoraAccountManagerImpl} from "@zoralabs/smart-wallet/ZoraAccountManagerImpl.sol";
+
 // import {ZoraFactoryImpl} from "@zoralabs/coins/src/ZoraFactoryImpl.sol";
 
 contract ZoraTest {
