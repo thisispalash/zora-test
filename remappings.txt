@@ -3,3 +3,4 @@
 @zoralabs/shared-contracts/=lib/zora-protocol/packages/shared-contracts/src/
 @zoralabs/coins/=lib/zora-protocol/packages/coins/src/
 @zoralabs/smart-wallet/=lib/zora-protocol/packages/smart-wallet/src/
+@uniswap/v4-core/=lib/v4-core/

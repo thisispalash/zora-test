@@ -11,3 +11,6 @@
 	path = lib/zora-protocol
 	url = https://github.com/ourzora/zora-protocol
 	branch = main
+[submodule "lib/v4-core"]
+	path = lib/v4-core
+	url = https://github.com/uniswap/v4-core
