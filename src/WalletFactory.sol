@@ -1,11 +1,12 @@
 // SPDX-License-Identifier: Apache-2.0
 pragma solidity ^0.8.23 < 0.9.0;
 
-import {ICoinbaseSmartWalletFactory} from "@zoralabs/smart-wallet/interfaces/ICoinbaseSmartWalletFactory.sol";
+// import {ICoinbaseSmartWalletFactory} from "@zoralabs/smart-wallet/interfaces/ICoinbaseSmartWalletFactory.sol";
+import {ICoinbaseSmartWalletFactoryLike} from "./ICoinbaseSmartWalletFactoryLike.sol";
 
 contract WalletFactory {
 
-  ICoinbaseSmartWalletFactory public constant smartWalletFactory = ICoinbaseSmartWalletFactory(0x0BA5ED0c6AA8c49038F819E587E2633c4A9F428a);
+  ICoinbaseSmartWalletFactoryLike public constant smartWalletFactory = ICoinbaseSmartWalletFactoryLike(0x0BA5ED0c6AA8c49038F819E587E2633c4A9F428a);
   address public manager;
 
   event NewCoinbaseWallet(address indexed wallet);
