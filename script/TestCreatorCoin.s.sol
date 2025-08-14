@@ -210,10 +210,10 @@ contract TestCreatorCoin is Script {
         vm.startBroadcast();
         
         ZoraFactoryImpl newFactoryImpl = new ZoraFactoryImpl(
-            address(coinImpl),         // coinImpl (V3)
-            address(coinV4Impl),      // coinV4Impl 
+            address(coinImpl),          // coinImpl (V3)
+            address(coinV4Impl),        // coinV4Impl 
             address(creatorCoinImpl),   // creatorCoinImpl
-            address(creatorCoinHook),   // contentCoinHook
+            address(contentCoinHook),   // contentCoinHook
             address(creatorCoinHook)    // creatorCoinHook
         );
         console2.log("New factory impl:", address(newFactoryImpl));
@@ -297,21 +297,40 @@ contract TestCreatorCoin is Script {
 
 /// @notice This contract is an attempt to get around CREATE2 and Uniswap complexities
 /// @dev Error :: `HooksDeployer` is above the contract size limit (94696 > 24576)
-contract HooksDeployer {
+contract HooksDeployer is Script {
+
+    event NewSaltCalculated(bytes32 salt, address deployer, string hookName);
+
     function deployContentCoinHook(
         address poolManager,
         address coinVersionLookup,
         address[] memory trustedSenders,
         address upgradeGate
     ) external returns (address hook, bytes32 salt) {
-        (hook, salt) = HooksDeployment.mineForContentCoinSalt(
-            address(this), poolManager, coinVersionLookup, trustedSenders, upgradeGate
-        );
+        // (hook, salt) = HooksDeployment.mineForContentCoinSalt(
+        //     address(this), poolManager, coinVersionLookup, trustedSenders, upgradeGate
+        // );
+
+        // emit NewSaltCalculated(salt, address(this), "ContentCoinHook");
         
-        IHooks deployedHook = HooksDeployment.deployContentCoinHook(
-            poolManager, coinVersionLookup, trustedSenders, upgradeGate, salt
+        // IHooks deployedHook = HooksDeployment.deployContentCoinHook(
+        //     poolManager, coinVersionLookup, trustedSenders, upgradeGate, salt
+        // );
+        // return (address(deployedHook), salt);
+
+        /// @dev `deployHookWithExistingOrNewSalt` does not use `vm`
+        (IHooks hook_, bytes32 salt_) = HooksDeployment.deployHookWithExistingOrNewSalt(
+            address(this),
+            HooksDeployment.contentCoinCreationCode(
+                poolManager, 
+                coinVersionLookup, 
+                trustedSenders, 
+                upgradeGate
+            ),
+            salt
         );
-        return (address(deployedHook), salt);
+
+        return (address(hook_), salt_);
     }
     
     function deployCreatorCoinHook(
@@ -320,14 +339,30 @@ contract HooksDeployer {
         address[] memory trustedSenders,
         address upgradeGate
     ) external returns (address hook, bytes32 salt) {
-        (hook, salt) = HooksDeployment.mineForCreatorCoinSalt(
-            address(this), poolManager, coinVersionLookup, trustedSenders, upgradeGate
-        );
+        // (hook, salt) = HooksDeployment.mineForCreatorCoinSalt(
+        //     address(this), poolManager, coinVersionLookup, trustedSenders, upgradeGate
+        // );
+
+        // emit NewSaltCalculated(salt, address(this), "CreatorCoinHook");
         
-        IHooks deployedHook = HooksDeployment.deployHookWithSalt(
-            HooksDeployment.creatorCoinHookCreationCode(poolManager, coinVersionLookup, trustedSenders, upgradeGate),
-            salt
+        // IHooks deployedHook = HooksDeployment.deployHookWithSalt(
+        //     HooksDeployment.creatorCoinHookCreationCode(poolManager, coinVersionLookup, trustedSenders, upgradeGate),
+        //     salt
+        // );
+        // return (address(deployedHook), salt);
+
+        /// @dev `deployHookWithExistingOrNewSalt` does not use `vm`
+        (IHooks hook_, bytes32 salt_) = HooksDeployment.deployHookWithExistingOrNewSalt(
+            address(this),
+            HooksDeployment.creatorCoinHookCreationCode(
+                poolManager, 
+                coinVersionLookup, 
+                trustedSenders, 
+                upgradeGate
+            ),
+            bytes32(0)
         );
-        return (address(deployedHook), salt);
+
+        return (address(hook_), salt_);
     }
 }
