@@ -28,7 +28,7 @@ import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
  * @notice This script upgrades the Zora Factory on Base Sepolia Fork and attempts to onboard a creator coin.
  * 
  * To run,
- * $ anvil --fork-url https://sepolia.base.org --chain-id 84532 --port 8545
+ * $ anvil --fork-url https://sepolia.base.org --chain-id 84532 --port 8545 --auto-impersonate --code-size-limit 0 -vvvvv
  * 
  * $ forge script script/TestCreatorCoin.s.sol:TestCreatorCoin --rpc-url http://localhost:8545 --private-key <PRIVATE_KEY> --broadcast -vv
  * 
@@ -221,12 +221,14 @@ contract TestCreatorCoin is Script {
         vm.stopBroadcast();
         
         // 4. Upgrade the proxy (impersonate admin owner)
-        vm.startPrank(adminOwner);
+        vm.startBroadcast();
+        // vm.startPrank(adminOwner);
         UUPSUpgradeable(ZORA_FACTORY_PROXY).upgradeToAndCall(
             address(newFactoryImpl),
             ""
         );
-        vm.stopPrank();
+        // vm.stopPrank();
+        vm.stopBroadcast();
         
         console2.log("=== Factory upgraded successfully ===");
         
