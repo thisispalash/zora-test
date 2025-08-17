@@ -29,7 +29,7 @@ contract Manager is Ownable {
 
   }
 
-  // demo creator coin ipfs ~ bafkreibwhkbceqbgydntjhzz3dz5d2c7b3wwkpzr5gqfdx56dermh6bomq
+  // demo creator coin ipfs ~ bafkreidaaysnttv2uq3jotw3ss4txnywiqwoetybhqywzoudgu2r3xhuye
   function onboard(string memory _username, string memory _uri, string memory _dapp) external onlyOwner returns (address) {
 
     // deploy wallet
