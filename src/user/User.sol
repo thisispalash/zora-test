@@ -9,6 +9,9 @@ contract User is ZoraHelper {
 
   address public dAppAdmin;
   address public creatorCoin;
+  address[] public coins;
+
+  mapping(address => uint256) public coinToId;
 
   constructor(address _dAppAdmin) {
     dAppAdmin = _dAppAdmin;
@@ -17,13 +20,22 @@ contract User is ZoraHelper {
   function initZora(
     string memory _uri,
     string memory _username,
-    string memory _dappInitials
+    string memory _dAppInitials
   ) public returns (address) {
-    creatorCoin = initZora(dAppAdmin, _uri, _username, _dappInitials);
+    creatorCoin = initZora(dAppAdmin, _uri, _username, _dAppInitials);
     return creatorCoin;
   }
 
-
-
+  function createContentCoin(
+    string memory _uri,
+    string memory _dAppInitials,
+    uint256 _counter
+  ) public returns (address) {
+    require(creatorCoin != address(0), "Creator coin not initialized");
+    address _contentCoin = createContentCoin(dAppAdmin, creatorCoin, _uri, _dAppInitials, _counter);
+    coins.push(_contentCoin);
+    coinToId[_contentCoin] = _counter;
+    return _contentCoin;
+  }
 
 }
