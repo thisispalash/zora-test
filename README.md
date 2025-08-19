@@ -1,66 +1,29 @@
-## Foundry
+## Zora Tests
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+The goal of this repository is primarily to test out Zora contracts so dApps can tap into the 
+Zora ecosystem, without necessarily being in that system. The core idea is to have a 
+[7579Module](https://eips.ethereum.org/EIPS/eip-7579#:~:text=id.-,Modules,-This) that users can 
+install on their Smart Accounts and become holders of Creator Coins within Zora.
 
-Foundry consists of:
+The intended use of this module capability is for use in dApps that generate some form of content
+as a result of user activity on the dApp, primarily as a way to incentivise the user to either 
+generate more activity within a dApp, or to suggest / enforce _good_ behaviour, or any other 
+reason.
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+## Testing Plan
 
-## Documentation
+With the new Zora docs, things are a lot clearer and there is no need to reverse engineer the 
+structure of the contracts and try to _hack_ it together. As such, the following testing categories
+are designed / planned,
 
-https://book.getfoundry.sh/
+### Category 1: Sanity Check
+> Confirm correct deployments, with hardcoded `poolConfig`
 
-## Usage
 
-### Build
+### Category 2: Using the SDK
+> Pass in `poolConfig` value during fn call, or use Chainlink Functions
 
-```shell
-$ forge build
-```
 
-### Test
+### Category 3: ERC7579
+> Standardize the Zora Helper to a 7579Module
 
-```shell
-$ forge test
-```
-
-### Format
-
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
