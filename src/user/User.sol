@@ -13,6 +13,11 @@ contract User is ZoraHelper {
 
   mapping(address => uint256) public coinToId;
 
+  modifier onlyDAppAdmin() {
+    require(msg.sender == dAppAdmin, "Only dAppAdmin can call this function");
+    _;
+  }
+
   constructor(address _dAppAdmin) {
     dAppAdmin = _dAppAdmin;
   }
@@ -21,7 +26,7 @@ contract User is ZoraHelper {
     string memory _uri,
     string memory _username,
     string memory _dAppInitials
-  ) public returns (address) {
+  ) public onlyDAppAdmin returns (address) {
     creatorCoin = initZora(dAppAdmin, _uri, _username, _dAppInitials);
     return creatorCoin;
   }
@@ -30,7 +35,7 @@ contract User is ZoraHelper {
     string memory _uri,
     string memory _dAppInitials,
     uint256 _counter
-  ) public returns (address) {
+  ) public onlyDAppAdmin returns (address) {
     require(creatorCoin != address(0), "Creator coin not initialized");
     address _contentCoin = createContentCoin(dAppAdmin, creatorCoin, _uri, _dAppInitials, _counter);
     coins.push(_contentCoin);
