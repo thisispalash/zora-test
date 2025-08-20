@@ -8,7 +8,7 @@ install on their Smart Accounts and become holders of Creator Coins within Zora.
 The intended use of this module capability is for use in dApps that generate some form of content
 as a result of user activity on the dApp, primarily as a way to incentivise the user to either 
 generate more activity within a dApp, or to suggest / enforce _good_ behaviour, or any other 
-reason.
+reason. See [example uses](#use-cases) below for inspiration.
 
 ## Testing Plan
 
@@ -46,3 +46,9 @@ to be the final creator of the Coin.
 ### Category 3: ERC7579
 > Standardize the Zora Helper to a 7579Module
 
+
+## Use Cases
+
+### Token Tuner
+
+### Semicolon Fingers
