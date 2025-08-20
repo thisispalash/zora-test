@@ -54,7 +54,7 @@ contract TestContentCoin is Test {
 
     console.log("==== Starting test_content ====");
 
-    string memory contentIPFS = "ipfs://bafkreieu2ctavpgcmlffyaywrzhwdqp23ex5vzzol7uoaje6dtvpysr7ce";
+    string memory contentIPFS = "ipfs://bafkreih5j2hao4wmoahru6bkdpzwhjie6lmdwirzmnouojpbwqrwmuzjny";
 
     vm.startBroadcast();
 
