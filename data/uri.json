@@ -1,0 +1,19 @@
+{
+  "creator.json": {
+    "uri": "bafkreibq4pqxkb7nqc6sw6dmzz7fqhtwfch2mhipbd4zuvok2kjjolkgw4",
+    "name": "user01.TT",
+    "image": "image.png"
+  },
+  "content.json": {
+    "uri": "bafkreih5j2hao4wmoahru6bkdpzwhjie6lmdwirzmnouojpbwqrwmuzjny",
+    "name": "TT-00001",
+    "image": "image.png"
+  },
+  "image.png": {
+    "uri": "bafkreieu2ctavpgcmlffyaywrzhwdqp23ex5vzzol7uoaje6dtvpysr7ce",
+    "used_in": [
+      "creator.json",
+      "content.json"
+    ]
+  }
+}
