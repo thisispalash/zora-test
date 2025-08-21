@@ -110,6 +110,7 @@ abstract contract ZoraHelper {
   }
 
   /// @dev create a name and symbol for the creator coin
+  /// name, symbol: <username>.<dAppInitials>
   function _createNameAndSymbol(
     string memory _username, 
     string memory _dAppInitials
@@ -121,6 +122,7 @@ abstract contract ZoraHelper {
   }
 
   /// @dev create a name and symbol for the content coin
+  /// name, symbol: <dAppInitials>-<counter> (5 digits)
   function _createNameAndSymbol(
     string memory _dAppInitials,
     uint256 _counter
