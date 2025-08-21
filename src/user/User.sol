@@ -3,15 +3,15 @@ pragma solidity ^0.8.22 < 0.9.0;
 
 import {ICoinbaseSmartWalletFactoryMinimal} from "../_i/ICoinbaseSmartWalletFactory.sol";
 
-import {ZoraHelper} from "./ZoraHelper.sol";
+import {ZoraCallbacks} from "./ZoraCallbacks.sol";
 
-contract User is ZoraHelper {
+contract User is ZoraCallbacks {
 
   address public dAppAdmin;
   address public creatorCoin;
   address[] public coins;
 
-  mapping(address => uint256) public coinToId;
+  mapping(address => string) public coinToId;
 
   modifier onlyDAppAdmin() {
     require(msg.sender == dAppAdmin, "Only dAppAdmin can call this function");
@@ -24,22 +24,26 @@ contract User is ZoraHelper {
 
   function initZora(
     string memory _uri,
-    string memory _username,
-    string memory _dAppInitials
+    string memory _name,
+    string memory _symbol,
+    bytes memory _poolConfig
   ) public onlyDAppAdmin returns (address) {
-    creatorCoin = initZora(dAppAdmin, _uri, _username, _dAppInitials);
+    creatorCoin = initZora(dAppAdmin, _uri, _name, _symbol, _poolConfig);
     return creatorCoin;
   }
 
   function createContentCoin(
     string memory _uri,
-    string memory _dAppInitials,
-    uint256 _counter
+    string memory _name,
+    string memory _symbol,
+    bytes memory _poolConfig
   ) public onlyDAppAdmin returns (address) {
+    
     require(creatorCoin != address(0), "Creator coin not initialized");
-    address _contentCoin = createContentCoin(dAppAdmin, creatorCoin, _uri, _dAppInitials, _counter);
+    
+    address _contentCoin = createContentCoin(dAppAdmin, _uri, _name, _symbol, _poolConfig);
     coins.push(_contentCoin);
-    coinToId[_contentCoin] = _counter;
+    coinToId[_contentCoin] = _name;
     return _contentCoin;
   }
 

@@ -4,11 +4,12 @@ pragma solidity ^0.8.22 < 0.9.0;
 import {User} from "./user/User.sol";
 import {UserFactory} from "./user/UserFactory.sol";
 
-contract Admin {
+import {ZoraHelper} from "./ZoraHelper.sol";
+
+contract Admin is ZoraHelper {
 
   address owner;
   address userFactory;
-  string dAppInitials;
   uint256 coinCounter;
 
   mapping(address => bool) public users;
@@ -18,14 +19,17 @@ contract Admin {
   mapping(uint256 => address) public coinIdToUser;
   mapping(uint256 => address) public coinIdToCoin;
 
+  event UserCreated(address indexed user, string username);
+  event CreatorCoinCreated(address indexed creatorCoin, string name, string symbol, string uri);
+  event ContentCoinCreated(address indexed contentCoin, address indexed user, uint256 coinId, string name, string symbol, string uri);
+
   modifier onlyOwner() {
     require(msg.sender == owner, "Only owner can call this function");
     _;
   }
 
-  constructor(string memory _dAppInitials) {
+  constructor(string memory _dAppInitials) ZoraHelper(_dAppInitials) {
     owner = msg.sender;
-    dAppInitials = _dAppInitials;
     coinCounter = 0;
   }
 
@@ -38,14 +42,19 @@ contract Admin {
     string memory _username
   ) external onlyOwner returns (address user, address creatorCoin) {
 
+    /// Deploy User contract
     UserFactory _userFactory = UserFactory(userFactory);
     User _user = User(_userFactory.createUser());
 
-    creatorCoin = _user.initZora(
-      _uri,
-      _username,
-      dAppInitials
-    );
+    emit UserCreated(address(_user), _username);
+
+    /// Create creator coin for the user
+    (string memory _name, string memory _symbol) = _generateCreatorCoinNameAndSymbol(_username);
+    bytes memory _poolConfig = _generateStaticPoolConfig(ZORA_TOKEN);
+
+    creatorCoin = _user.initZora(_uri, _name, _symbol, _poolConfig);
+
+    emit CreatorCoinCreated(creatorCoin, _name, _symbol, _uri);
 
     users[address(_user)] = true;
     userToCreatorCoin[address(_user)] = creatorCoin;
@@ -64,11 +73,12 @@ contract Admin {
 
     User user_ = User(_user);
 
-    address _contentCoin = user_.createContentCoin(
-      _uri,
-      dAppInitials,
-      coinCounter
-    );
+    (string memory _name, string memory _symbol) = _generateContentCoinNameAndSymbol(coinCounter);
+    bytes memory _poolConfig = _generateStaticPoolConfig(user_.creatorCoin());
+
+    address _contentCoin = user_.createContentCoin(_uri, _name, _symbol, _poolConfig);
+
+    emit ContentCoinCreated(_contentCoin, _user, coinCounter, _name, _symbol, _uri);
 
     coinIdToUser[coinCounter] = _user;
     coinIdToCoin[coinCounter] = _contentCoin;
