@@ -141,6 +141,7 @@ abstract contract ZoraHelper {
     for (_i = 5 - _i; _i > 0; _i--) {
       _toString = string(abi.encodePacked(_toString, "0"));
     }
+    _toString = string(abi.encodePacked(_toString, _counter));
 
     name = string(abi.encodePacked(_dAppInitials, "-", _toString));
     symbol = string(abi.encodePacked(_dAppInitials, "-", _toString));
