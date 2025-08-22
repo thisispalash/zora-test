@@ -16,21 +16,19 @@ contract Category1A is Script {
 
     uint256 deployerPrivateKey = vm.envUint("PRIV_KEY");
     address deployer = vm.addr(deployerPrivateKey);
-
     console.log("Deployer :: ", deployer);
 
+
+    /** Setup Protocol Contracts */
+
+    console.log("=== Setup Admin and UserFactory ===");
+    
     vm.startBroadcast(deployerPrivateKey);
 
-    console.log("=== Deploying Admin ===");
-
-    Admin admin = new Admin("TT");
-
-    console.log("Admin :: ", address(admin));
-
-    console.log("=== Deploying UserFactory ===");
-
+    Admin admin = new Admin("ZT"); // Zora Test
     UserFactory userFactory = new UserFactory(address(admin));
 
+    console.log("Admin :: ", address(admin));
     console.log("UserFactory :: ", address(userFactory));
 
     admin.setUserFactory(address(userFactory));
@@ -38,34 +36,58 @@ contract Category1A is Script {
     vm.stopBroadcast();
     
 
+    /** Onboarding Users */
+
+    console.log("=== Create the two users ===");
+
     vm.startBroadcast(deployerPrivateKey);
 
-    console.log("=== Deploying Creator Coin ===");
+    string memory gokuIPFS = "ipfs://bafkreibzd3meziylhx26cdarwtvgmbjh6lxt3ecdkyfvw4kbx36wccmmm4";
+    string memory vegetaIPFS = "ipfs://bafkreibvdwmqdcvy3fjvirj63rh72boo3jwgo4jffiimydi5djlefjblt4";
 
-    string memory creatorIPFS = "ipfs://bafkreibq4pqxkb7nqc6sw6dmzz7fqhtwfch2mhipbd4zuvok2kjjolkgw4";
+    (address user01, address creatorCoin01) = admin.onboardUser(gokuIPFS, "goku");
+    (address user02, address creatorCoin02) = admin.onboardUser(vegetaIPFS, "vegeta");
 
-    (address user, address creatorCoin) = admin.onboardUser(creatorIPFS, "user01");
+    console.log("--- Goku ---");
+    console.log("User :: ", user01);
+    console.log("Creator Coin :: ", creatorCoin01);
+    console.log("Creator IPFS :: ", gokuIPFS);
+    console.log("Creator Name :: ", "goku.ZT");
 
-    console.log("User :: ", user);
-    console.log("Creator Coin :: ", creatorCoin);
-    console.log("Creator IPFS :: ", creatorIPFS);
-    console.log("Creator Name :: ", "user01.TT");
+    console.log("--- Vegeta ---");
+    console.log("User :: ", user02);
+    console.log("Creator Coin :: ", creatorCoin02);
+    console.log("Creator IPFS :: ", vegetaIPFS);
+    console.log("Creator Name :: ", "vegeta.ZT");
 
     vm.stopBroadcast();
 
 
+    /** Awarding Content Coins to Users */
+    
+    console.log("=== Award Content Coins to Users ===");
+
     vm.startBroadcast(deployerPrivateKey);
 
-    console.log("=== Deploying Content Coin ===");
+    string memory content01IPFS = "ipfs://bafkreiglz4kleybyya5itsicek3nkpvzo5dz7jc3zc5j5xim7wkqewhc6a";
+    string memory content02IPFS = "ipfs://bafkreihmbk7jb2ktw5oq4yios3lz3ojr564olawfiq4unn3xsjlbdi7x54";
 
-    string memory contentIPFS = "ipfs://bafkreih5j2hao4wmoahru6bkdpzwhjie6lmdwirzmnouojpbwqrwmuzjny";
+    (uint256 coinId01, address contentCoin01) = admin.awardCoin(user01, content01IPFS);
+    (uint256 coinId02, address contentCoin02) = admin.awardCoin(user02, content02IPFS);
 
-    (uint256 coinId, address contentCoin) = admin.awardCoin(user, contentIPFS);
+    console.log("--- Content 01 ---");
+    console.log("Coin ID :: ", coinId01);
+    console.log("Awarded to ::", user01);
+    console.log("Content Coin :: ", contentCoin01);
+    console.log("Content IPFS :: ", content01IPFS);
+    console.log("Content Name :: ", "ZT-00001"); // @dev should be programmatic, but works for now
 
-    console.log("Coin ID :: ", coinId);
-    console.log("Content Coin :: ", contentCoin);
-    console.log("Content IPFS :: ", contentIPFS);
-    console.log("Content Name :: ", "TT-00001"); /// @dev should be programmatic, but works for now
+    console.log("--- Content 02 ---");
+    console.log("Coin ID :: ", coinId02);
+    console.log("Awarded to ::", user02);
+    console.log("Content Coin :: ", contentCoin02);
+    console.log("Content IPFS :: ", content02IPFS);
+    console.log("Content Name :: ", "ZT-00002"); // @dev should be programmatic, but works for now
 
     vm.stopBroadcast();
 
