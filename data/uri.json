@@ -15,5 +15,49 @@
       "creator.json",
       "content.json"
     ]
+  },
+  "creator01.png": {
+    "uri": "bafybeicv2n4r4dsrf526kdqlnritya2prtb6mdusi4nldhotu23pkcczwq",
+    "used_in": [
+      "creator01.json"
+    ]
+  },
+  "creator01.json": {
+    "uri": "bafkreibzd3meziylhx26cdarwtvgmbjh6lxt3ecdkyfvw4kbx36wccmmm4",
+    "name": "goku.ZT",
+    "image": "creator01.png"
+  },
+  "creator02.png": {
+    "uri": "bafkreiahicl7bvnhlq6d4ku6jtis2ay4ydspup5gz3uwr6voz5hbr25bfu",
+    "used_in": [
+      "creator02.json"
+    ]
+  },
+  "creator02.json": {
+    "uri": "bafkreibvdwmqdcvy3fjvirj63rh72boo3jwgo4jffiimydi5djlefjblt4",
+    "name": "vegeta.ZT",
+    "image": "creator02.png"
+  },
+  "content01.png": {
+    "uri": "bafkreiazw4yxe4anf6cp4yfrdc53psrc43mykpekx2uqfb7qrkg2he5tea",
+    "used_in": [
+      "content01.json"
+    ]
+  },
+  "content01.json": {
+    "uri": "bafkreiglz4kleybyya5itsicek3nkpvzo5dz7jc3zc5j5xim7wkqewhc6a",
+    "name": "ZT-00001",
+    "image": "content01.png"
+  },
+  "content02.png": {
+    "uri": "bafkreiel74onlgn4vj53rgb5umzeja3vaaexgaove5sva5uwaibrcxllum",
+    "used_in": [
+      "content02.json"
+    ]
+  },
+  "content02.json": {
+    "uri": "bafkreihmbk7jb2ktw5oq4yios3lz3ojr564olawfiq4unn3xsjlbdi7x54",
+    "name": "ZT-00002",
+    "image": "content02.png"
   }
 }

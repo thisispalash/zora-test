@@ -1,0 +1,10 @@
+{
+  "name": "ZT-00001",
+  "description": "The three star dragon ball",
+  "symbol": "ZT-00001",
+  "image": "ipfs://bafkreiazw4yxe4anf6cp4yfrdc53psrc43mykpekx2uqfb7qrkg2he5tea",
+  "content": {
+    "uri": "ipfs://bafkreiazw4yxe4anf6cp4yfrdc53psrc43mykpekx2uqfb7qrkg2he5tea",
+    "mime": "image/png"
+  }
+}
