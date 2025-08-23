@@ -54,4 +54,23 @@ Content Coin goes through correctly, but Creator Coin does not show up as expect
 
 ### Token Tuner
 
+This is a daily DeFi game where the users are challenged to trade strategically and follow a 
+predefined curve. The user who sticks closest to the curve, over the course of the day, will win 
+the opportunity to determine the following day's curve. As such, this curve selection and 
+subsequent trading activity is considered to be a sort of social art, where the initial conditions 
+(ie, the curve parameters) are quite important. Therefore, we do not want a winning user to put in 
+"bad" parameters, and instead focus on something that may look good at the end. This is where Zora
+comes in.
+
+Yes, winners can, and likely will, be awarded NFTs of their creations as well, but what Zora 
+enables is the following,
+- A more granular market, as compared to a NFT.
+- Network effects, in that non-users of Token Tuners may purchase some of this Content.
+- Finally, exposure to the dApp in general. As this is a daily game, there will be a Coin created 
+daily, awarded to some user. However, each Coin will look and feel very similar, hopefully causing 
+curiosity around the dApp.
+
+In the end, what Zora enables is another layer of incentive for the users to define "good" curves
+so they may fetch some tokens on the secondary market of Zora.
+
 ### Semicolon Fingers
