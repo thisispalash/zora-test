@@ -45,7 +45,7 @@ abstract contract ZoraHelper {
     for (_i = 5 - _i; _i > 0; _i--) {
       _toString = string(abi.encodePacked(_toString, "0"));
     }
-    _toString = string(abi.encodePacked(_toString, _counter));
+    _toString = string(abi.encodePacked(_toString, _counter)); /// @dev this is wrong, need conversion
 
     name = string(abi.encodePacked(dAppInitials, "-", _toString));
     symbol = string(abi.encodePacked(dAppInitials, "-", _toString));
