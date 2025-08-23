@@ -30,6 +30,9 @@ to be the final creator of the Coin.
 #### 1a: Static `poolConfig`
 > Hardcoded and static configuration, based on [reference txns](./notes/reference_txns.md)
 
+Content Coin goes through correctly, but Creator Coin does not show up as expected. See more in 
+[initial notes](./notes/category-1a-20250822.md).
+
 
 #### 1b: Dynamic `poolConfig`
 > Still generated within contract, but now as updateable contract variables
